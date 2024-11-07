@@ -1,0 +1,16 @@
+<!DOCTYPE html>
+<html>
+<head><title>Task List</title></head>
+<body>
+<h1>Task List</h1>
+{% for task in tasks %}
+    <div>
+        <h2>{{ task.title }}</h2>
+        <p>Due Date: {{ task.due_date }}</p>
+        <p>Status: {% if task.completed %} Completed {% else %} 
+            {% if task.due_date < now %} Overdue {% else %} Pending {% endif %} 
+        {% endif %}</p>
+    </div>
+{% endfor %}
+</body>
+</html>

@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+<head><title>Lista de Tareas</title></head>
+<body>
+<h1>Lista de Tareas</h1>
+<form method="post">
+    {{ form.hidden_tag() }}
+    <p>
+        {{ form.title.label }}<br>
+        {{ form.title(size=32) }}
+    </p>
+    <p>
+        {{ form.due_date.label }}<br>
+        {{ form.due_date() }}
+    </p>
+    <p>{{ form.submit() }}</p>
+</form>
+
+{% for task in tasks %}
+    <div>
+        <h2>{{ task.title }}</h2>
+        <p>Fecha de Vencimiento: {{ task.due_date }}</p>
+        <p>Estado: {{ task.status }}</p>
+        {% if not task.completed %}
+            <form action="{{ url_for('complete_task', task_id=task.id) }}" method="post">
+                <button type="submit">Completar Tarea</button>
+            </form>
+        {% endif %}
+    </div>
+{% endfor %}
+</body>
+</html>
